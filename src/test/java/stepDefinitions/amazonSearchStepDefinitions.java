@@ -22,8 +22,6 @@ public class amazonSearchStepDefinitions {
         amazonh_pf = new amazonH_PF(driver);
 
     }
-
-
     @When("user enters a product name")
     public void userEntersAProductName() {
 
