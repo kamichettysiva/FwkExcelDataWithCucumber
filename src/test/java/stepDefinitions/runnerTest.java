@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         glue={"stepDefinitions"},
         monochrome = true,
         publish = true,
-        tags="@SanityFlow",
+        tags="@RegressionFlow",
         plugin={"pretty", "html:target/cucumber-html-report.html", "json:target/cucumber.json", "junit:target/cucumber.xml", "rerun:target/rerun.txt"})
 
 public class runnerTest {

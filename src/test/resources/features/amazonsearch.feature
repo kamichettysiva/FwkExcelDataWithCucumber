@@ -1,8 +1,10 @@
 Feature: Validate search functionality
 
+  Background: user launches webpage
+    Given amazon webpage is launched
+
   @SanityFlow
   Scenario Outline: Search for a product and validate results
-    Given amazon webpage is launched
     When user enters a "<product>" name
     And clicks on search button
     Then search results should be displayed
@@ -13,7 +15,14 @@ Feature: Validate search functionality
 
   @RegressionFlow
   Scenario: Search for a product and validate results 2
-    Given amazon webpage is launched
+    When user enters a product name
+    |row0col0|row0col1|row0col2|
+    |row1col0|row1col1|row1col2|
+    And clicks on search button
+    Then search results should be displayed
+
+  @SmokeTest
+  Scenario: Search for a product and validate results 2
     When user enters a "product" name
     And clicks on search button
     Then search results should be displayed
