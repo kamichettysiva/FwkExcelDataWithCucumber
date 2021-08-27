@@ -21,7 +21,7 @@ Feature: Validate search functionality
     And clicks on search button
     Then search results should be displayed
 
-  @SmokeTest
+  @RegressionFlow
   Scenario: Search for a product and validate results 2
     When user enters a "product" name
     And clicks on search button

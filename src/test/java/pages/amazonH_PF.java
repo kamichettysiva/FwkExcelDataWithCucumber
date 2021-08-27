@@ -13,7 +13,7 @@ public class amazonH_PF {
     @FindBy(id="nav-search-submit-button")
     WebElement btn_searchbtn;
 
-    WebDriver driver = null;
+    WebDriver driver;
 
     public amazonH_PF(WebDriver driver){
         this.driver = driver;

@@ -20,26 +20,14 @@ public class amazonSearchStepDefinitions {
     WebDriver driver = null;
     amazonH_PF amazonh_pf = null;
 
-    @Before(order=1, value="@RegressionFlow")
+    @Before(order=1)
     public void cucumberSetup(){
         String ProjDir = System.getProperty("user.dir");
         System.setProperty("webdriver.chrome.driver", ProjDir+"/src/test/resources/drivers/chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
         System.out.println("This is my First Before tag");
-
-    }
-
-    @Before("@SanityFlow")
-    public void dSetup2(){
-        /*String ProjDir = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", ProjDir+"/src/test/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);*/
-        System.out.println("This is my Second Before tag");
-
     }
 
     @After
@@ -48,15 +36,6 @@ public class amazonSearchStepDefinitions {
         System.out.println("This is @After");
     }
 
-    @BeforeStep
-    public void beforeStep(){
-        System.out.println("This is @Before Step");
-    }
-
-    @AfterStep
-    public void afterStep(){
-        System.out.println("This is @After Step");
-    }
     @Given("amazon webpage is launched")
     public void amazon_webpage_is_launched() {
 
