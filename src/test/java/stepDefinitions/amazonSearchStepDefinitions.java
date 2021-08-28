@@ -1,37 +1,41 @@
 package stepDefinitions;
 
+import base.DriverManager;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeStep;
+import io.cucumber.java.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.amazonH_PF;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
 public class amazonSearchStepDefinitions {
     WebDriver driver = null;
     amazonH_PF amazonh_pf = null;
+    DriverManager drivermanager = new DriverManager();
 
     @Before(order=1)
     public void cucumberSetup(){
-        String ProjDir = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", ProjDir+"/src/test/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
         System.out.println("This is my First Before tag");
     }
 
     @After
-    public void tearDown(){
+    public void tearDown(Scenario scenario) throws IOException {
+        if(scenario.isFailed()) {
+            File sshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            byte[] sscontent = FileUtils.readFileToByteArray(sshot);
+            scenario.attach(sscontent, "image/png", "Screenshot");
+        }
         driver.close();
         System.out.println("This is @After");
     }
@@ -69,4 +73,10 @@ public class amazonSearchStepDefinitions {
         amazonh_pf.enterTextInSearchBox(arg0);
     }
 
+    @Given("amazon webpage is launched in {string}")
+    public void amazonWebpageIsLaunchedIn(String browsername) {
+        driver = drivermanager.getBrowserDriver(browsername);
+        driver.get("https://www.amazon.in/");
+        amazonh_pf = new amazonH_PF(driver);
+    }
 }

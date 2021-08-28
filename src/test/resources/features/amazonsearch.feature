@@ -1,7 +1,8 @@
+@Firefox
 Feature: Validate search functionality
 
   Background: user launches webpage
-    Given amazon webpage is launched
+    Given amazon webpage is launched in "firefox"
 
   @SanityFlow
   Scenario Outline: Search for a product and validate results
@@ -21,7 +22,7 @@ Feature: Validate search functionality
     And clicks on search button
     Then search results should be displayed
 
-  @RegressionFlow
+  @RegressionFlows
   Scenario: Search for a product and validate results 2
     When user enters a "product" name
     And clicks on search button
