@@ -3,6 +3,7 @@ package stepDefinitions;
 import base.DriverManager;
 import base.ExcelDataReader;
 import base.Helper;
+import base.WriteDataToExcel;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.*;
 import io.cucumber.java.en.And;
@@ -31,6 +32,7 @@ public class amazonSearchStepDefinitions {
     DriverManager drivermanager = new DriverManager();
     ExcelDataReader excelDataReader = new ExcelDataReader();
     Logger logger = Helper.getLogger(amazonSearchStepDefinitions.class);
+    WriteDataToExcel writeDataToExcel = new WriteDataToExcel();
 
     @Before(order=1)
     public void cucumberSetup(){
@@ -109,6 +111,7 @@ public class amazonSearchStepDefinitions {
             if(cellIter.get(0).equalsIgnoreCase(arg1)){
                 amazonh_pf.enterTextInSearchBox(cellIter.get(1));
                 System.out.println(cellIter.get(1));
+                writeDataToExcel.writeDate(arg0,"Sheet1", arg1,"Output", "Test Output from Feature file");
 
             }
         }
