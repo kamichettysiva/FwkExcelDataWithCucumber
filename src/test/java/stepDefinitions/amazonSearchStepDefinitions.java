@@ -1,9 +1,6 @@
 package stepDefinitions;
 
-import base.DriverManager;
-import base.ExcelDataReader;
-import base.Helper;
-import base.WriteDataToExcel;
+import base.*;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.*;
 import io.cucumber.java.en.And;
@@ -31,24 +28,27 @@ public class amazonSearchStepDefinitions {
     amazonH_PF amazonh_pf = null;
     DriverManager drivermanager = new DriverManager();
     ExcelDataReader excelDataReader = new ExcelDataReader();
-    Logger logger = Helper.getLogger(amazonSearchStepDefinitions.class);
+    //Logger logger = Helper.getLogger(amazonSearchStepDefinitions.class);
     WriteDataToExcel writeDataToExcel = new WriteDataToExcel();
+
+    Logger logger = LoggerHelper.getLoggerHelper(amazonSearchStepDefinitions.class);
 
     @Before(order=1)
     public void cucumberSetup(){
         System.out.println("This is my First Before tag");
-        logger.debug("I m inside the before method");
+
     }
 
 
     @After
     public void tearDown(Scenario scenario) throws IOException {
         if(scenario.isFailed()) {
+            logger.debug("I m in scenario" + scenario.getName());
             File sshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             byte[] sscontent = FileUtils.readFileToByteArray(sshot);
             scenario.attach(sscontent, "image/png", "Screenshot");
         }
-        logger.debug("I m inside the after method");
+        logger.fatal("I m inside the after method");
         driver.close();
         System.out.println("This is @After");
     }

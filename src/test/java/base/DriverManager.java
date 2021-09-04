@@ -14,7 +14,7 @@ public class DriverManager {
         if (driverName.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions option = new ChromeOptions();
-            option.addArguments("headless");
+            //option.addArguments("headless");
              driver = new ChromeDriver(option);
         }else if(driverName.equalsIgnoreCase("firefox")){
             WebDriverManager.firefoxdriver().setup();

@@ -1,8 +1,8 @@
-@Chrome
+@Firefox
 Feature: Validate Parallel run
 
   Background: user launches webpage
-    Given amazon webpage is launched in "chrome"
+    Given amazon webpage is launched in "firefox"
 
   @RegressionFlow
 Scenario Outline: Search for a product and validate results
